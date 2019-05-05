@@ -1,0 +1,14 @@
+main: com.mysteryworlds.crucio.spigot.CrucioSpigotPlugin
+version: 1.0.0
+name: Crucio
+
+author: Felix Klauke
+api-version: 1.13.2
+description: Base plugin with main functionalities, services and tools.
+
+website: https://www.mysteryworlds.com
+
+depend:
+  - ProtocolLib
+
+prefix: Crucio
