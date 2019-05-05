@@ -25,6 +25,11 @@
             <name>Klauke Enterprises Maven Snapshots</name>
             <url>https://repository.klauke-enterprises.com/repository/maven-snapshots/</url>
         </repository>
+
+        <repository>
+            <id>spigot-repo</id>
+            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
+        </repository>
     </repositories>
 
     <distributionManagement>
