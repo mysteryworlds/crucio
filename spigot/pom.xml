@@ -8,14 +8,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>crucio-core</artifactId>
+    <artifactId>crucio-spigot</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.mysteryworlds.crucio</groupId>
-            <artifactId>crucio-api</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
 
 </project>
