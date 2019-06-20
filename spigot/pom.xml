@@ -11,11 +11,29 @@
     <artifactId>crucio-spigot</artifactId>
 
     <dependencies>
+
+        <!-- Spigot -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.13.2-R0.1-SNAPSHOT</version>
+            <version>1.14.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Isabelle -->
+        <dependency>
+            <groupId>de.d3adspace.isabelle</groupId>
+            <artifactId>isabelle-spigot-theresa</artifactId>
+            <version>2.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Crucio API -->
+        <dependency>
+            <groupId>com.mysteryworlds.crucio</groupId>
+            <artifactId>crucio-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
