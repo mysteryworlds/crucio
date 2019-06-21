@@ -1,6 +1,5 @@
 package com.mysteryworlds.crucio.api.service;
 
-import java.util.List;
 import java.util.Locale;
 
 public interface LanguageService {
@@ -8,9 +7,10 @@ public interface LanguageService {
     /**
      * Translate the message with the given message key into the given locale and replace the given arguments.
      *
-     * @param locale The locale.
+     * @param locale     The locale.
      * @param messageKey The message key.
-     * @param arguments The arguments.
+     * @param arguments  The arguments.
+     *
      * @return The translated message.
      */
     String translate(Locale locale, String messageKey, String... arguments);
@@ -19,7 +19,8 @@ public interface LanguageService {
      * Translate the message with the given message key into the default language and replace the given arguments.
      *
      * @param messageKey The message key.
-     * @param arguments The arguments.
+     * @param arguments  The arguments.
+     *
      * @return The translated message.
      */
     String translate(String messageKey, String... arguments);

@@ -5,7 +5,6 @@ import com.mysteryworlds.crucio.api.service.LanguageService;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.Locale;
 
@@ -37,28 +36,6 @@ public class LanguageServiceImpl implements LanguageService {
         return String.format(colorizedMessage, (Object[]) arguments);
     }
 
-    /**
-     * Get a localized message in the given locale.
-     *
-     * @param locale The locale.
-     * @param messageKey The key of the message.
-     * @return The localized message.
-     */
-    private String getLocalizedMessage(Locale locale, String messageKey) {
-
-        ConfigurationSection language = configuration.getConfigurationSection("language");
-        if (language == null) {
-            return "";
-        }
-
-        ConfigurationSection configurationSection = language.getConfigurationSection(locale.toLanguageTag());
-        if (configurationSection == null) {
-            return "";
-        }
-
-        return configurationSection.getString(messageKey);
-    }
-
     @Override
     public String translate(String messageKey, String... arguments) {
 
@@ -77,5 +54,28 @@ public class LanguageServiceImpl implements LanguageService {
         Preconditions.checkNotNull(locale, "Default locale cannot be null.");
 
         Locale.setDefault(locale);
+    }
+
+    /**
+     * Get a localized message in the given locale.
+     *
+     * @param locale     The locale.
+     * @param messageKey The key of the message.
+     *
+     * @return The localized message.
+     */
+    private String getLocalizedMessage(Locale locale, String messageKey) {
+
+        ConfigurationSection language = configuration.getConfigurationSection("language");
+        if (language == null) {
+            return "";
+        }
+
+        ConfigurationSection configurationSection = language.getConfigurationSection(locale.toLanguageTag());
+        if (configurationSection == null) {
+            return "";
+        }
+
+        return configurationSection.getString(messageKey);
     }
 }

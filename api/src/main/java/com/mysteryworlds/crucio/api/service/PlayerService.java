@@ -10,6 +10,7 @@ public interface PlayerService {
      * Get the current name of the player with the given unique id.
      *
      * @param uniqueId The unique id.
+     *
      * @return The name of the player.
      */
     String getNameSync(UUID uniqueId);
@@ -18,6 +19,7 @@ public interface PlayerService {
      * Get the name of the player with the given unique id asynchronously.
      *
      * @param uniqueId The unique id of the player.
+     *
      * @return The future of the name.
      */
     ListenableFuture<String> getName(UUID uniqueId);
@@ -26,6 +28,7 @@ public interface PlayerService {
      * Get the unique id of the player with the given name.
      *
      * @param playerName The name of the player.
+     *
      * @return The unique id.
      */
     UUID getUniqueIdSync(String playerName);
@@ -34,6 +37,7 @@ public interface PlayerService {
      * Get the unique id of the player with the given name asynchronously.
      *
      * @param playerName The name of the player.
+     *
      * @return The future of the unique id.
      */
     ListenableFuture<UUID> getUniqueId(String playerName);
