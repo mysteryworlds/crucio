@@ -1,31 +1,39 @@
 package com.mysteryworlds.crucio.spigot;
 
-import com.google.inject.Binder;
+import com.mysteryworlds.crucio.api.service.LanguageService;
 import com.mysteryworlds.crucio.spigot.listener.PlayerJoinListener;
 import com.mysteryworlds.crucio.spigot.listener.PlayerKickListener;
 import com.mysteryworlds.crucio.spigot.listener.PlayerQuitListener;
-import com.mysteryworlds.crucio.spigot.module.CrucioSpigotModule;
-import de.d3adspace.isabelle.spgiot.theresa.IsabelleSpigotExtension;
-import de.d3adspace.theresa.lifecycle.annotation.WarmUp;
-import org.bukkit.event.HandlerList;
+import com.mysteryworlds.crucio.spigot.service.language.LanguageServiceImpl;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.annotation.PreDestroy;
-import javax.inject.Inject;
-
-public class CrucioSpigotPlugin extends IsabelleSpigotExtension {
+public class CrucioSpigotPlugin extends JavaPlugin {
 
     // Services
-    @Inject
     private PluginManager pluginManager;
 
     // Listeners
-    @Inject private PlayerJoinListener playerJoinListener;
-    @Inject private PlayerQuitListener playerQuitListener;
-    @Inject private PlayerKickListener playerKickListener;
+    private PlayerJoinListener playerJoinListener;
+    private PlayerQuitListener playerQuitListener;
+    private PlayerKickListener playerKickListener;
 
-    @WarmUp
-    public void onStart() {
+    @Override
+    public void onEnable() {
+
+        saveDefaultConfig();
+
+        // Config
+        getConfig().options().copyDefaults(true);
+
+        // Language
+        LanguageService languageService = new LanguageServiceImpl(getConfig());
+
+        pluginManager = Bukkit.getPluginManager();
+        playerJoinListener = new PlayerJoinListener(languageService);
+        playerQuitListener = new PlayerQuitListener(languageService);
+        playerKickListener = new PlayerKickListener(languageService);
 
         // Register all listeners
         registerListeners();
@@ -39,18 +47,5 @@ public class CrucioSpigotPlugin extends IsabelleSpigotExtension {
         pluginManager.registerEvents(playerJoinListener, this);
         pluginManager.registerEvents(playerQuitListener, this);
         pluginManager.registerEvents(playerKickListener, this);
-    }
-
-    @PreDestroy
-    public void onStop() {
-
-        // Unregister all listeners
-        HandlerList.unregisterAll(this);
-    }
-
-    @Override
-    public void configure(Binder binder) {
-
-        binder.install(new CrucioSpigotModule());
     }
 }

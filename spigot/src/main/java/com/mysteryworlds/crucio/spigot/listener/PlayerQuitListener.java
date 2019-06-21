@@ -7,13 +7,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import javax.inject.Inject;
-
 public class PlayerQuitListener implements Listener {
 
     private final LanguageService languageService;
 
-    @Inject
     public PlayerQuitListener(LanguageService languageService) {
         this.languageService = languageService;
     }

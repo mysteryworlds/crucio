@@ -7,13 +7,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerKickEvent;
 
-import javax.inject.Inject;
-
 public class PlayerKickListener implements Listener {
 
     private final LanguageService languageService;
 
-    @Inject
     public PlayerKickListener(LanguageService languageService) {
         this.languageService = languageService;
     }

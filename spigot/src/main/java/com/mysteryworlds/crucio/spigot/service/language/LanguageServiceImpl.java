@@ -3,21 +3,18 @@ package com.mysteryworlds.crucio.spigot.service.language;
 import com.google.common.base.Preconditions;
 import com.mysteryworlds.crucio.api.service.LanguageService;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.FileConfiguration;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import java.util.Locale;
-import java.util.ResourceBundle;
 
-@Singleton
 public class LanguageServiceImpl implements LanguageService {
 
-    private final String resourceBundleName;
+    private final Configuration configuration;
 
-    @Inject
-    public LanguageServiceImpl(@Named("crucioResourceBundleName") String resourceBundleName) {
-        this.resourceBundleName = resourceBundleName;
+    public LanguageServiceImpl(Configuration configuration) {
+        this.configuration = configuration;
     }
 
     @Override
@@ -25,15 +22,9 @@ public class LanguageServiceImpl implements LanguageService {
         Preconditions.checkNotNull(messageKey, "message key cannot be null");
 
         // Get resource bundle
-        ResourceBundle resourceBundle;
-        if (locale != null) {
-            resourceBundle = ResourceBundle.getBundle(resourceBundleName, locale);
-        } else {
-            resourceBundle = ResourceBundle.getBundle(resourceBundleName);
-        }
 
         // Load message
-        String message = resourceBundle.getString(messageKey);
+        String message = getLocalizedMessage(locale, messageKey);
 
         // Colorized message
         String colorizedMessage = ChatColor.translateAlternateColorCodes('&', message);
@@ -46,11 +37,33 @@ public class LanguageServiceImpl implements LanguageService {
         return String.format(colorizedMessage, (Object[]) arguments);
     }
 
+    /**
+     * Get a localized message in the given locale.
+     *
+     * @param locale The locale.
+     * @param messageKey The key of the message.
+     * @return The localized message.
+     */
+    private String getLocalizedMessage(Locale locale, String messageKey) {
+
+        ConfigurationSection language = configuration.getConfigurationSection("language");
+        if (language == null) {
+            return "";
+        }
+
+        ConfigurationSection configurationSection = language.getConfigurationSection(locale.toLanguageTag());
+        if (configurationSection == null) {
+            return "";
+        }
+
+        return configurationSection.getString(messageKey);
+    }
+
     @Override
     public String translate(String messageKey, String... arguments) {
 
         // Use default locale
-        return translate(null, messageKey, arguments);
+        return translate(getDefaultLocale(), messageKey, arguments);
     }
 
     @Override
