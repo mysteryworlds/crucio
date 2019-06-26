@@ -16,6 +16,10 @@ api-version: ${spigot.version}
 # Author
 author: Felix Klauke <info@felix-klauke.com>
 
+# Dependencies
+depend:
+  - Vault
+
 # The logger prefix
 prefix: Crucio
 
