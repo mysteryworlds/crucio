@@ -3,17 +3,16 @@ package com.mysteryworlds.crucio.spigot.service.language;
 import com.google.common.base.Preconditions;
 import com.mysteryworlds.crucio.api.service.LanguageService;
 import org.bukkit.ChatColor;
-import org.bukkit.configuration.Configuration;
-import org.bukkit.configuration.ConfigurationSection;
 
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class LanguageServiceImpl implements LanguageService {
 
-    private final Configuration configuration;
+    private final String resourceBundleName;
 
-    public LanguageServiceImpl(Configuration configuration) {
-        this.configuration = configuration;
+    public LanguageServiceImpl(String resourceBundleName) {
+        this.resourceBundleName = resourceBundleName;
     }
 
     @Override
@@ -66,16 +65,7 @@ public class LanguageServiceImpl implements LanguageService {
      */
     private String getLocalizedMessage(Locale locale, String messageKey) {
 
-        ConfigurationSection language = configuration.getConfigurationSection("language");
-        if (language == null) {
-            return "";
-        }
-
-        ConfigurationSection configurationSection = language.getConfigurationSection(locale.toLanguageTag());
-        if (configurationSection == null) {
-            return "";
-        }
-
-        return configurationSection.getString(messageKey);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle(resourceBundleName, locale);
+        return resourceBundle.getString(messageKey);
     }
 }
