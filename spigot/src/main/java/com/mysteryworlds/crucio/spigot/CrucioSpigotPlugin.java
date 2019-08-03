@@ -14,6 +14,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class CrucioSpigotPlugin extends JavaPlugin {
 
+  private static final String RESOURCE_BUNDLE_NAME = "crucio";
+
   // Services
   private PluginManager pluginManager;
 
@@ -47,7 +49,7 @@ public class CrucioSpigotPlugin extends JavaPlugin {
     chat = registration.getProvider();
 
     // Language
-    LanguageService languageService = new LanguageServiceImpl(getConfig());
+    LanguageService languageService = new LanguageServiceImpl(RESOURCE_BUNDLE_NAME);
 
     playerJoinListener = new PlayerJoinListener(chat, languageService);
     playerQuitListener = new PlayerQuitListener(languageService);
