@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>crucio-parent</artifactId>
-        <groupId>com.mysteryworlds.crucio</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>crucio-api</artifactId>
+  <dependencies>
 
-    <artifactId>crucio-api</artifactId>
+    <!-- Spigot API -->
+    <dependency>
+      <artifactId>spigot-api</artifactId>
+      <groupId>org.spigotmc</groupId>
+      <scope>provided</scope>
+      <version>1.14.2-R0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 
-    <dependencies>
+  <modelVersion>4.0.0</modelVersion>
 
-        <!-- Spigot API -->
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.14.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+  <parent>
+    <artifactId>crucio-parent</artifactId>
+    <groupId>com.mysteryworlds.crucio</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 </project>

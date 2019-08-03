@@ -9,23 +9,24 @@ import org.bukkit.event.player.PlayerKickEvent;
 
 public class PlayerKickListener implements Listener {
 
-    private final LanguageService languageService;
+  private final LanguageService languageService;
 
-    public PlayerKickListener(LanguageService languageService) {
-        this.languageService = languageService;
-    }
+  public PlayerKickListener(LanguageService languageService) {
+    this.languageService = languageService;
+  }
 
-    @EventHandler
-    public void onPlayerKick(PlayerKickEvent event) {
+  @EventHandler
+  public void onPlayerKick(PlayerKickEvent event) {
 
-        // Obtain player
-        Player player = event.getPlayer();
+    // Obtain player
+    Player player = event.getPlayer();
 
-        // Set leave message
-        String reason = event.getReason();
-        String displayName = player.getDisplayName();
-        String messagePrefix = languageService.translate(Messages.KEY_MESSAGE_PREFIX);
-        String kickLeaveMessage = languageService.translate(Messages.KEY_MESSAGE_KICK_LEAVE, displayName, reason);
-        event.setLeaveMessage(messagePrefix + kickLeaveMessage);
-    }
+    // Set leave message
+    String reason = event.getReason();
+    String displayName = player.getDisplayName();
+    String messagePrefix = languageService.translate(Messages.KEY_MESSAGE_PREFIX);
+    String kickLeaveMessage = languageService
+      .translate(Messages.KEY_MESSAGE_KICK_LEAVE, displayName, reason);
+    event.setLeaveMessage(messagePrefix + kickLeaveMessage);
+  }
 }

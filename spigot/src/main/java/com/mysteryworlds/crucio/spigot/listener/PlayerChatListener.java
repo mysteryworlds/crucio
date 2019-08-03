@@ -8,10 +8,10 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class PlayerChatListener implements Listener {
 
-    @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent event) {
+  @EventHandler
+  public void onPlayerChat(AsyncPlayerChatEvent event) {
 
-        Player player = event.getPlayer();
-        event.setFormat(String.format("%s: %s$s", player.getDisplayName(), ChatColor.WHITE));
-    }
+    Player player = event.getPlayer();
+    event.setFormat(String.format("%s: %s$s", player.getDisplayName(), ChatColor.WHITE));
+  }
 }

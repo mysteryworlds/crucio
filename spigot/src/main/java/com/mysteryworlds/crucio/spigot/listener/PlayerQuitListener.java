@@ -9,22 +9,22 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerQuitListener implements Listener {
 
-    private final LanguageService languageService;
+  private final LanguageService languageService;
 
-    public PlayerQuitListener(LanguageService languageService) {
-        this.languageService = languageService;
-    }
+  public PlayerQuitListener(LanguageService languageService) {
+    this.languageService = languageService;
+  }
 
-    @EventHandler
-    public void onPlayerQuit(PlayerQuitEvent event) {
+  @EventHandler
+  public void onPlayerQuit(PlayerQuitEvent event) {
 
-        // Obtain player
-        Player player = event.getPlayer();
+    // Obtain player
+    Player player = event.getPlayer();
 
-        // Set quit message
-        String displayName = player.getDisplayName();
-        String messagePrefix = languageService.translate(Messages.KEY_MESSAGE_PREFIX);
-        String quitMessage = languageService.translate(Messages.KEY_MESSAGE_QUIT, displayName);
-        event.setQuitMessage(messagePrefix + quitMessage);
-    }
+    // Set quit message
+    String displayName = player.getDisplayName();
+    String messagePrefix = languageService.translate(Messages.KEY_MESSAGE_PREFIX);
+    String quitMessage = languageService.translate(Messages.KEY_MESSAGE_QUIT, displayName);
+    event.setQuitMessage(messagePrefix + quitMessage);
+  }
 }
