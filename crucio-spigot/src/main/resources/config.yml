@@ -1,6 +1,0 @@
-language:
-  de-DE:
-    prefix: "&7[&cCrucio&7]: &e"
-    join: "&r%s &eist jetzt hier."
-    quit: "&r%s &eist jetzt weg."
-    kick-leave: "%1$s wurde gekickt. Grund: §f%2$s"
