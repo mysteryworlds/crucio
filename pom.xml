@@ -125,7 +125,7 @@
       <artifactId>mockito-junit-jupiter</artifactId>
       <groupId>org.mockito</groupId>
       <scope>test</scope>
-      <version>3.2.4</version>
+      <version>3.3.3</version>
     </dependency>
 
   </dependencies>
