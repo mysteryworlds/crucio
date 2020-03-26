@@ -1,0 +1,4 @@
+dependencies {
+  api 'com.google.inject:guice:4.2.3'
+  implementation 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
+}

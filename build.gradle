@@ -1,8 +1,6 @@
-plugins {
-  id 'java'
-}
-
 allprojects {
+  apply plugin: 'java'
+
   group = 'com.mysteryworlds.crucio'
   version = '1.0-SNAPSHOT'
 
@@ -13,6 +11,16 @@ allprojects {
     google()
     mavenLocal()
     mavenCentral()
+    maven {
+      url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+      content {
+        includeGroup 'org.bukkit'
+        includeGroup 'org.spigotmc'
+      }
+    }
+    maven {
+      url = 'https://oss.sonatype.org/content/repositories/snapshots'
+    }
   }
 
   java {
