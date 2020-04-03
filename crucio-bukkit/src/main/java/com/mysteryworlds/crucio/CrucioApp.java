@@ -1,6 +1,7 @@
 package com.mysteryworlds.crucio;
 
 import com.google.inject.Guice;
+import com.mysteryworlds.crucio.config.CrucioConfig;
 import com.mysteryworlds.crucio.cosmetic.PlayerCosmeticTrigger;
 import com.mysteryworlds.crucio.gamemode.GameModeChangeTrigger;
 import com.mysteryworlds.crucio.gamemode.GameModeCommand;
@@ -21,13 +22,15 @@ public final class CrucioApp extends JavaPlugin {
   @Override
   public void onEnable() {
     saveDefaultResources();
-    var module = new CrucioModule(this);
+    var config = CrucioConfig.fromFileConfig(getConfig());
+    var module = new CrucioModule(config, this);
     var injector = Guice.createInjector(module);
     injector.injectMembers(this);
     registerFeatures();
   }
 
   private void saveDefaultResources() {
+    getConfig().options().copyDefaults(true);
     saveDefaultConfig();
   }
 

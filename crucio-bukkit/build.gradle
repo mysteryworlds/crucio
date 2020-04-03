@@ -5,5 +5,4 @@ dependencies {
 
 jar {
   from configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-  from configurations.compuleClasspath.from
 }

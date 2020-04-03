@@ -1,25 +1,21 @@
 package com.mysteryworlds.crucio.i18n;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Table;
 import java.util.Locale;
-import java.util.ResourceBundle;
-import javax.inject.Inject;
 import javax.inject.Singleton;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
 
 @Singleton
 public final class I18n {
-  private static final Locale DEFAULT_LOCALE = Locale.GERMAN;
-  private static final String BUNDLE_NAME = "crucio";
+  private static final Locale DEFAULT_LOCALE = Locale.GERMANY;
   private static final String PREFIX_KEY = "prefix";
 
-  private final Plugin plugin;
+  private final Table<Locale, String, String> messages;
 
-  @Inject
-  private I18n(Plugin plugin) {
-    this.plugin = plugin;
+  private I18n(Table<Locale, String, String> messages) {
+    this.messages = messages;
   }
 
   public void sendMessage(
@@ -53,7 +49,7 @@ public final class I18n {
     Locale locale,
     Object... arguments
   ) {
-    var message = findBundle(locale).getString(messageKey);
+    var message = findMessage(locale, messageKey);
     var prefix = translateMessage(PREFIX_KEY, locale);
     message = String.format(message, arguments);
     message =  String.format("%s%s", prefix, message);
@@ -68,10 +64,8 @@ public final class I18n {
   }
 
   private Locale findLocaleOrDefault(String locale) {
-    var foundLocale = Locale.forLanguageTag(locale);
-    if (foundLocale == null && locale.contains("_")) {
-      return findLocaleOrDefault(locale.replaceAll("_", "-"));
-    }
+    var localeKey = locale.replace("_", "-");
+    var foundLocale = Locale.forLanguageTag(localeKey);
     return foundLocale != null ? foundLocale : DEFAULT_LOCALE;
   }
 
@@ -87,11 +81,17 @@ public final class I18n {
     Locale locale,
     Object... arguments
   ) {
-    var message = findBundle(locale) .getString(messageKey);
-    return ChatColor.translateAlternateColorCodes('&', String.format(message, arguments));
+    var message = findMessage(locale, messageKey);
+    message = String.format(message, arguments);
+    return ChatColor.translateAlternateColorCodes('&', message);
   }
 
-  private ResourceBundle findBundle(Locale locale) {
-    return ResourceBundle.getBundle(BUNDLE_NAME, locale);
+  private String findMessage(Locale locale, String messageKey) {
+    return messages.get(locale, messageKey);
+  }
+
+  public static I18n withMessages(Table<Locale, String, String> messages) {
+    Preconditions.checkNotNull(messages);
+    return new I18n(messages);
   }
 }
