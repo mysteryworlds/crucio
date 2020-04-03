@@ -1,3 +1,40 @@
 name: Crucio
 main: com.mysteryworlds.crucio.CrucioApp
 version: 2.0.0
+
+author: Felix Klauke
+
+website: https://www.mysteryworlds.com
+
+api-version: 1.15
+
+depend:
+  - Vault
+  - ProtocolLib
+
+commands:
+  gamemode:
+    description: Changes your own or other players game mode.
+    aliases:
+      - gm
+      - mode
+    permission: crucio.command.gamemode
+    usage: |
+      /gm
+      /gm (survival:0:creative:1:adventure:2:spectator:3) [player]
+
+permissions:
+  crucio.command.*:
+    description: "Gives you access to all crucio commands"
+    default: op
+    children:
+      - crucio.command.gamemode.*
+  crucio.command.gamemode.*:
+    description: Gives you access to all game mode related commands
+    children:
+      - crucio.command.gamemode
+      - crucio.command.gamemode.other
+  crucio.command.gamemode:
+    description: "Gives you access for the command to change your game mode"
+  crucio.command.gamemode.other:
+    description: "Gives you access for the command to change other players game mode"
