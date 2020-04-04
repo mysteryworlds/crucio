@@ -5,6 +5,7 @@ import com.google.common.collect.ImmutableTable.Builder;
 import com.google.common.collect.Table;
 import java.util.Locale;
 import java.util.Map.Entry;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -21,7 +22,7 @@ public final class CrucioConfig {
   }
 
   public String chatFormat() {
-    return chatFormat;
+    return ChatColor.translateAlternateColorCodes('&', chatFormat);
   }
 
   public Table<Locale, String, String> messages() {
@@ -57,7 +58,7 @@ public final class CrucioConfig {
 
   public static CrucioConfig fromFileConfig(FileConfiguration configuration) {
     return new CrucioConfig(
-      configuration.getString("chat.format"),
+      "",
       configuration.getConfigurationSection("messages")
     );
   }

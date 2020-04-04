@@ -1,6 +1,6 @@
 name: Crucio
 main: com.mysteryworlds.crucio.CrucioApp
-version: 2.0.0
+version: 1.1.0-SNAPSHOT
 
 author: Felix Klauke
 
@@ -19,9 +19,11 @@ commands:
       - gm
       - mode
     permission: crucio.command.gamemode
-    usage: |
-      /gm
-      /gm (survival:0:creative:1:adventure:2:spectator:3) [player]
+  godmode:
+    description: Changes your own or other players god mode.
+    aliases:
+      - god
+    permission: crucio.command.godmode
 
 permissions:
   crucio.command.*:
@@ -29,8 +31,9 @@ permissions:
     default: op
     children:
       - crucio.command.gamemode.*
+      - crucio.command.godmode.*
   crucio.command.gamemode.*:
-    description: Gives you access to all game mode related commands
+    description: "Gives you access to all game mode related commands"
     children:
       - crucio.command.gamemode
       - crucio.command.gamemode.other
@@ -38,3 +41,12 @@ permissions:
     description: "Gives you access for the command to change your game mode"
   crucio.command.gamemode.other:
     description: "Gives you access for the command to change other players game mode"
+  crucio.command.godmode.*:
+    description: "Gives you access to all god mode related commands"
+    children:
+      - crucio.command.godmode
+      - crucio.command.godmode.other
+  crucio.command.godmode:
+    description: "Gives you access for the command to change your god mode"
+  crucio.command.godmodeother:
+    description: "Gives you access for the command to change other players god mode"

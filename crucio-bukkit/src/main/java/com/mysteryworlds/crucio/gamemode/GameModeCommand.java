@@ -46,11 +46,11 @@ public final class GameModeCommand implements CommandExecutor, TabCompleter {
   private boolean toggleGameMode(Command command, CommandSender sender) {
     if (!sender.hasPermission("crucio.command.gamemode")) {
       sender.sendMessage(command.getPermissionMessage());
-      return false;
+      return true;
     }
     if (!(sender instanceof Player)) {
       sender.sendMessage(i18n.translatePrefixedMessage("command-player-only"));
-      return false;
+      return true;
     }
     var player = (Player) sender;
     var gameMode = GameMode.fromPlayer(player);
@@ -65,11 +65,11 @@ public final class GameModeCommand implements CommandExecutor, TabCompleter {
   ) {
     if (!sender.hasPermission("crucio.command.gamemode")) {
       sender.sendMessage(command.getPermissionMessage());
-      return false;
+      return true;
     }
     if (!(sender instanceof Player)) {
       sender.sendMessage(i18n.translatePrefixedMessage("command-player-only"));
-      return false;
+      return true;
     }
     var player = (Player) sender;
     var mode = GameMode.fromString(gameMode);
@@ -85,12 +85,12 @@ public final class GameModeCommand implements CommandExecutor, TabCompleter {
   ) {
     if (!sender.hasPermission("crucio.command.gamemode.other")) {
       sender.sendMessage(command.getPermissionMessage());
-      return false;
+      return true;
     }
     var player = Bukkit.getPlayerExact(targetName);
     if (player == null) {
       sender.sendMessage(i18n.translatePrefixedMessage("command-player-not-found"));
-      return false;
+      return true;
     }
     var mode = GameMode.fromString(gameMode);
     mode.apply(player);
