@@ -5,14 +5,14 @@ chat:
 
 messages:
   de-DE:
-    prefix: '&7[&cMFXCraft&7]: &e '
+    prefix: '&7[&cMFXCraft&7]: &e'
     gamemode-change: 'Dein Spielmodus wurde auf &6%s &egeändert.'
     command-player-only: 'Dieses Kommando ist nur für Spieler.'
     command-player-not-found: 'Dieser Spieler wurde nicht gefunden.'
     player-join: '%s &eist jetzt hier.'
     player-quit: '%s &eist jetzt weg.'
   en-US:
-    prefix: '&7[&cMFXCraft&7]: &e '
+    prefix: '&7[&cMFXCraft&7]: &e'
     gamemode-change: 'Your game mode was changed to &6%s&e.'
     command-player-only: 'This command is only for players.'
     command-player-not-found: 'This Player couldnt be found.'
