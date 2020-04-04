@@ -29,7 +29,9 @@ allprojects {
     withJavadocJar()
     withSourcesJar()
   }
+}
 
+subprojects {
   publishing {
     repositories {
       maven {
