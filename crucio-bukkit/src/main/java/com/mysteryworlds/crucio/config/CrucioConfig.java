@@ -58,7 +58,7 @@ public final class CrucioConfig {
 
   public static CrucioConfig fromFileConfig(FileConfiguration configuration) {
     return new CrucioConfig(
-      "",
+      configuration.getString("chat.format"),
       configuration.getConfigurationSection("messages")
     );
   }
