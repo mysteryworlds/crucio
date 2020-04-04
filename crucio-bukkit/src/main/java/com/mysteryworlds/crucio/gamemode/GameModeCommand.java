@@ -1,14 +1,18 @@
 package com.mysteryworlds.crucio.gamemode;
 
 import com.mysteryworlds.crucio.i18n.I18n;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 public final class GameModeCommand implements CommandExecutor, TabCompleter {
   private final I18n i18n;
@@ -74,9 +78,10 @@ public final class GameModeCommand implements CommandExecutor, TabCompleter {
   }
 
   private boolean changeGameModeOther(
-    Command command, CommandSender sender,
-    String targetName,
-    String gameMode
+    Command command,
+    CommandSender sender,
+    String gameMode,
+    String targetName
   ) {
     if (!sender.hasPermission("crucio.command.gamemode.other")) {
       sender.sendMessage(command.getPermissionMessage());
@@ -89,6 +94,7 @@ public final class GameModeCommand implements CommandExecutor, TabCompleter {
     }
     var mode = GameMode.fromString(gameMode);
     mode.apply(player);
+    sender.sendMessage(i18n.translatePrefixedMessage("command-gamemode-changed-other", targetName, mode.name()));
     return true;
   }
 
@@ -99,6 +105,26 @@ public final class GameModeCommand implements CommandExecutor, TabCompleter {
     String alias,
     String[] args
   ) {
-    return null;
+    switch (args.length) {
+      case 1: {
+        return StringUtil.copyPartialMatches(
+          args[0],
+          List.copyOf(GameMode.gameModeAliases()),
+          new ArrayList<>()
+        );
+      }
+      case 2: {
+        var playerNames = Bukkit.getOnlinePlayers().stream()
+          .map(HumanEntity::getName)
+          .collect(Collectors.toUnmodifiableList());
+        return StringUtil.copyPartialMatches(
+          args[1],
+          List.copyOf(playerNames),
+          new ArrayList<>()
+        );
+      }
+      default:
+        return List.of();
+    }
   }
 }

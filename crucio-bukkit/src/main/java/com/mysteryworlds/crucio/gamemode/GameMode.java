@@ -15,7 +15,7 @@ public enum GameMode {
   CREATIVE(
     org.bukkit.GameMode.CREATIVE,
     org.bukkit.GameMode.SURVIVAL,
-    List.of("adventure", "1")
+    List.of("creative", "1")
   ),
   ADVENTURE(
     org.bukkit.GameMode.ADVENTURE,
