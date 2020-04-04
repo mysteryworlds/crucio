@@ -9,10 +9,19 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public final class CrucioConfig {
+  private final String chatFormat;
   private final ConfigurationSection messages;
 
-  public CrucioConfig(ConfigurationSection messages) {
+  public CrucioConfig(
+    String chatFormat,
+    ConfigurationSection messages
+  ) {
+    this.chatFormat = chatFormat;
     this.messages = messages;
+  }
+
+  public String chatFormat() {
+    return chatFormat;
   }
 
   public Table<Locale, String, String> messages() {
@@ -47,6 +56,9 @@ public final class CrucioConfig {
   }
 
   public static CrucioConfig fromFileConfig(FileConfiguration configuration) {
-    return new CrucioConfig(configuration.getConfigurationSection("messages"));
+    return new CrucioConfig(
+      configuration.getString("chat.format"),
+      configuration.getConfigurationSection("messages")
+    );
   }
 }

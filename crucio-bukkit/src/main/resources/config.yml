@@ -1,4 +1,7 @@
-config-version: 2
+config-version: 3
+
+chat:
+  format: '%s&r: %s'
 
 messages:
   de-DE:

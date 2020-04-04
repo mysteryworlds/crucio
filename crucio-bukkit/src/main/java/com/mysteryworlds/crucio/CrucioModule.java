@@ -4,6 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.mysteryworlds.crucio.config.CrucioConfig;
 import com.mysteryworlds.crucio.i18n.I18n;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 public final class CrucioModule extends AbstractModule {
@@ -26,5 +27,12 @@ public final class CrucioModule extends AbstractModule {
   @Singleton
   I18n provideI18n() {
     return I18n.withMessages(config.messages());
+  }
+
+  @Provides
+  @Singleton
+  @Named("chatFormat")
+  String provideChatFormat() {
+    return config.chatFormat();
   }
 }
