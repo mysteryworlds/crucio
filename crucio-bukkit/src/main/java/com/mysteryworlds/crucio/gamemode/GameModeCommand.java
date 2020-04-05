@@ -94,7 +94,7 @@ public final class GameModeCommand implements CommandExecutor, TabCompleter {
     }
     var mode = GameMode.fromString(gameMode);
     mode.apply(player);
-    sender.sendMessage(i18n.translatePrefixedMessage("command-gamemode-changed-other", targetName, mode.name()));
+    sender.sendMessage(i18n.translatePrefixedMessage("gamemode-changed-other", targetName, mode.name()));
     return true;
   }
 

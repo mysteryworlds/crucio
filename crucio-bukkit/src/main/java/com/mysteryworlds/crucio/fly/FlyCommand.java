@@ -1,12 +1,8 @@
-package com.mysteryworlds.crucio.god;
+package com.mysteryworlds.crucio.fly;
 
-import com.google.inject.internal.cglib.core.$CodeEmitter;
 import com.mysteryworlds.crucio.i18n.I18n;
-import com.mysteryworlds.crucio.player.CrucioPlayer;
-import com.mysteryworlds.crucio.player.PlayerRepository;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.inject.Inject;
 import org.bukkit.Bukkit;
@@ -18,17 +14,12 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
-public final class GodModeCommand implements CommandExecutor, TabCompleter {
+public final class FlyCommand implements CommandExecutor, TabCompleter {
   private final I18n i18n;
-  private final PlayerRepository playerRepository;
 
   @Inject
-  private GodModeCommand(
-    I18n i18n,
-    PlayerRepository playerRepository
-  ) {
+  private FlyCommand(I18n i18n) {
     this.i18n = i18n;
-    this.playerRepository = playerRepository;
   }
 
   @Override
@@ -40,52 +31,51 @@ public final class GodModeCommand implements CommandExecutor, TabCompleter {
   ) {
     switch (args.length) {
       case 0: {
-        return toggleGodMode(command, sender);
+        return toggleFlight(command, sender);
       }
       case 1: {
-        return toggleGodModeOther(command, sender, args[0]);
+        return toggleFlightOther(command, sender, args[0]);
       }
     }
     return false;
   }
 
-  private boolean toggleGodMode(
+  private boolean toggleFlight(
     Command command,
     CommandSender sender
   ) {
-    if (!sender.hasPermission("crucio.command.godmode")) {
+    if (!sender.hasPermission("crucio.command.fly")) {
       sender.sendMessage(command.getPermissionMessage());
-      return false;
+      return true;
     }
     if (!(sender instanceof Player)) {
       sender.sendMessage(i18n.translatePrefixedMessage("command-player-only"));
-      return false;
+      return true;
     }
-    var bukkitPlayer = (Player) sender;
-    var player = playerRepository.findOrCreatePlayer(bukkitPlayer.getUniqueId());
-    player.toggleGod();
+    var player = (Player) sender;
+    boolean desiredState = !player.getAllowFlight();
+    player.setAllowFlight(desiredState);
+    sender.sendMessage(i18n.translatePrefixedMessage(desiredState ? "fly-enabled" : "fly-disabled"));
     return true;
   }
 
-  private boolean toggleGodModeOther(
+  private boolean toggleFlightOther(
     Command command,
     CommandSender sender,
     String targetName
   ) {
-    if (!sender.hasPermission("crucio.command.godmode.other")) {
+    if (!sender.hasPermission("crucio.command.fly.other")) {
       sender.sendMessage(command.getPermissionMessage());
-      return false;
+      return true;
     }
-    var player = playerRepository.findPlayer(targetName);
-    if (player.isEmpty()) {
+    var target = Bukkit.getPlayerExact(targetName);
+    if (target == null) {
       sender.sendMessage(i18n.translatePrefixedMessage("command-player-not-found"));
       return true;
     }
-    player.get().toggleGod();
-    sender.sendMessage(i18n.translatePrefixedMessage(
-      player.get().god() ? "godmode-enabled-other" : "godmode-disabled-other",
-      targetName
-    ));
+    boolean desiredState = !target.getAllowFlight();
+    sender.sendMessage(i18n.translatePrefixedMessage(desiredState ? "fly-enabled-other" : "fly-disabled-other", targetName));
+    i18n.sendPrefixedMessage(target, desiredState ? "fly-enabled" : "fly-disabled");
     return true;
   }
 

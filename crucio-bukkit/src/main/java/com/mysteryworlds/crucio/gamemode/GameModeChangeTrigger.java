@@ -19,7 +19,7 @@ public final class GameModeChangeTrigger implements Listener {
     var gameMode = GameMode.fromBukkitMode(gameModeChange.getNewGameMode());
     i18n.sendPrefixedMessage(
       gameModeChange.getPlayer(),
-      "gamemode-change",
+      "gamemode-changed",
       gameMode.name()
     );
   }

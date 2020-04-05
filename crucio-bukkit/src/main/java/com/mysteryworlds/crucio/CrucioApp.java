@@ -3,6 +3,7 @@ package com.mysteryworlds.crucio;
 import com.google.inject.Guice;
 import com.mysteryworlds.crucio.config.CrucioConfig;
 import com.mysteryworlds.crucio.cosmetic.PlayerCosmeticTrigger;
+import com.mysteryworlds.crucio.fly.FlyCommand;
 import com.mysteryworlds.crucio.gamemode.GameModeChangeTrigger;
 import com.mysteryworlds.crucio.gamemode.GameModeCommand;
 import com.mysteryworlds.crucio.god.GodModeCommand;
@@ -23,6 +24,8 @@ public final class CrucioApp extends JavaPlugin {
   private PluginManager pluginManager;
   @Inject
   private GameModeCommand gameModeCommand;
+  @Inject
+  private FlyCommand flyCommand;
   @Inject
   private GameModeChangeTrigger gameModeChangeTrigger;
   @Inject
@@ -66,6 +69,7 @@ public final class CrucioApp extends JavaPlugin {
 
   private void registerFeatures() {
     registerGameModeTriggerAndCommand();
+    registerFlyCommand();
     registerCosmetic();
     registerGodModeTriggerAndCommand();
   }
@@ -75,6 +79,12 @@ public final class CrucioApp extends JavaPlugin {
     gamemode.setExecutor(gameModeCommand);
     gamemode.setTabCompleter(gameModeCommand);
     pluginManager.registerEvents(gameModeChangeTrigger, this);
+  }
+
+  private void registerFlyCommand() {
+    var fly = getCommand("fly");
+    fly.setExecutor(flyCommand);
+    fly.setTabCompleter(flyCommand);
   }
 
   private void registerCosmetic() {

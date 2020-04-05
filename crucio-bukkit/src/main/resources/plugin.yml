@@ -32,6 +32,7 @@ permissions:
     children:
       - crucio.command.gamemode.*
       - crucio.command.godmode.*
+      - crucio.command.fly.*
   crucio.command.gamemode.*:
     description: "Gives you access to all game mode related commands"
     children:
@@ -50,3 +51,12 @@ permissions:
     description: "Gives you access for the command to change your god mode"
   crucio.command.godmodeother:
     description: "Gives you access for the command to change other players god mode"
+  crucio.command.fly.*:
+    description: "Gives you access to all fly related commands"
+    children:
+      - crucio.command.fly
+      - crucio.command.fly.other
+  crucio.command.fly:
+    description: "Gives you access for the command to change your fly mode"
+  crucio.command.fly.other:
+    description: "Gives you access for the command to change other players fly mode"
