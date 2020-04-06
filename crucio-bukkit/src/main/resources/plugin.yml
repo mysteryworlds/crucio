@@ -24,8 +24,19 @@ commands:
     aliases:
       - god
     permission: crucio.command.godmode
+  fly:
+    description: Changes you fly mode
+    permission: crucio.command.fly
+  spawn:
+    description: Teleports you to the worlds spawn
+    permission: crucio.command.spawn
 
 permissions:
+  crucio.*:
+    description: "Gives you access to all of crucio"
+    default: op
+    children:
+      - crucio.command.*
   crucio.command.*:
     description: "Gives you access to all crucio commands"
     default: op
@@ -33,6 +44,7 @@ permissions:
       - crucio.command.gamemode.*
       - crucio.command.godmode.*
       - crucio.command.fly.*
+      - crucio.command.spawn
   crucio.command.gamemode.*:
     description: "Gives you access to all game mode related commands"
     children:
@@ -60,3 +72,5 @@ permissions:
     description: "Gives you access for the command to change your fly mode"
   crucio.command.fly.other:
     description: "Gives you access for the command to change other players fly mode"
+  crucio.command.spawn:
+    description: "Gives you access for teleporting to the spawn"

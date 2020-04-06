@@ -9,12 +9,14 @@ import com.mysteryworlds.crucio.gamemode.GameModeCommand;
 import com.mysteryworlds.crucio.god.GodModeCommand;
 import com.mysteryworlds.crucio.god.GodModeTrigger;
 import com.mysteryworlds.crucio.player.PlayerRepository;
+import com.mysteryworlds.crucio.spawn.SpawnCommand;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,6 +36,8 @@ public final class CrucioApp extends JavaPlugin {
   private GodModeTrigger godModeTrigger;
   @Inject
   private GodModeCommand godModeCommand;
+  @Inject
+  private SpawnCommand spawnCommand;
 
   @Inject
   @Named("usersPath")
@@ -72,6 +76,7 @@ public final class CrucioApp extends JavaPlugin {
     registerFlyCommand();
     registerCosmetic();
     registerGodModeTriggerAndCommand();
+    registerSpawnCommand();
   }
 
   private void registerGameModeTriggerAndCommand() {
@@ -96,6 +101,12 @@ public final class CrucioApp extends JavaPlugin {
     godmode.setExecutor(godModeCommand);
     godmode.setTabCompleter(godModeCommand);
     pluginManager.registerEvents(godModeTrigger, this);
+  }
+
+  private void registerSpawnCommand() {
+    var spawn = getCommand("spawn");
+    spawn.setExecutor(spawnCommand);
+    spawn.setTabCompleter(spawnCommand);
   }
 
   @Override
