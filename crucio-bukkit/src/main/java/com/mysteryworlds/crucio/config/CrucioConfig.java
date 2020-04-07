@@ -6,6 +6,7 @@ import com.google.common.collect.Table;
 import java.util.Locale;
 import java.util.Map.Entry;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -56,7 +57,7 @@ public final class CrucioConfig {
     }
   }
 
-  public static CrucioConfig fromFileConfig(FileConfiguration configuration) {
+  public static CrucioConfig fromFileConfig(Configuration configuration) {
     return new CrucioConfig(
       configuration.getString("chat.format"),
       configuration.getConfigurationSection("messages")

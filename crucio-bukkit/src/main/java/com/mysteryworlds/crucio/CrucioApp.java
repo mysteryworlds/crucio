@@ -16,7 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.bukkit.command.PluginCommand;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -48,7 +48,7 @@ public final class CrucioApp extends JavaPlugin {
   @Override
   public void onEnable() {
     saveDefaultResources();
-    var configuration = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "config.yml"));
+    var configuration = loadConfiguration();
     var config = CrucioConfig.fromFileConfig(configuration);
     var module = new CrucioModule(config, this);
     var injector = Guice.createInjector(module);
@@ -66,8 +66,18 @@ public final class CrucioApp extends JavaPlugin {
     }
   }
 
+  private static final String CONFIG_LOCATION = "config.yml";
+
+  private Configuration loadConfiguration() {
+    var configuration = YamlConfiguration.loadConfiguration(
+      new File(getDataFolder(), CONFIG_LOCATION)
+    );
+    configuration.options().copyDefaults(true);
+    configuration.addDefaults(getConfig());
+    return configuration;
+  }
+
   private void saveDefaultResources() {
-    getConfig().options().copyDefaults(true);
     saveDefaultConfig();
   }
 

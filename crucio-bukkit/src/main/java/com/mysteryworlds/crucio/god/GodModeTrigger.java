@@ -31,7 +31,6 @@ public final class GodModeTrigger implements Listener {
     var player = playerRepository.findOrCreatePlayer(
       entityDamage.getEntity().getUniqueId()
     );
-    System.out.println(player);
     if (player.god()) {
       entityDamage.setCancelled(true);
       entityDamage.setDamage(ZERO_DAMAGE);
