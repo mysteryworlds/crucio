@@ -10,6 +10,8 @@ import com.mysteryworlds.crucio.god.GodModeCommand;
 import com.mysteryworlds.crucio.god.GodModeTrigger;
 import com.mysteryworlds.crucio.player.PlayerRepository;
 import com.mysteryworlds.crucio.spawn.SpawnCommand;
+import com.mysteryworlds.crucio.warp.WarpCommand;
+import com.mysteryworlds.crucio.warp.WarpRepository;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -38,12 +40,16 @@ public final class CrucioApp extends JavaPlugin {
   private GodModeCommand godModeCommand;
   @Inject
   private SpawnCommand spawnCommand;
+  @Inject
+  private WarpCommand warpCommand;
 
   @Inject
   @Named("usersPath")
   private Path usersPath;
   @Inject
   private PlayerRepository playerRepository;
+  @Inject
+  private WarpRepository warpRepository;
 
   @Override
   public void onEnable() {
@@ -56,6 +62,7 @@ public final class CrucioApp extends JavaPlugin {
     ensureDirectories();
     registerFeatures();
     playerRepository.loadAll();
+    warpRepository.loadAll();
   }
 
   private void ensureDirectories() {
@@ -69,16 +76,15 @@ public final class CrucioApp extends JavaPlugin {
   private static final String CONFIG_LOCATION = "config.yml";
 
   private Configuration loadConfiguration() {
-    var configuration = YamlConfiguration.loadConfiguration(
-      new File(getDataFolder(), CONFIG_LOCATION)
-    );
-    configuration.options().copyDefaults(true);
-    configuration.addDefaults(getConfig());
+    var file = new File(getDataFolder(), CONFIG_LOCATION);
+    var configuration = YamlConfiguration.loadConfiguration(file);
+    reloadConfig();
     return configuration;
   }
 
   private void saveDefaultResources() {
     saveDefaultConfig();
+    saveResource("warps.yml", false);
   }
 
   private void registerFeatures() {
@@ -87,6 +93,7 @@ public final class CrucioApp extends JavaPlugin {
     registerCosmetic();
     registerGodModeTriggerAndCommand();
     registerSpawnCommand();
+    registerWarpCommand();
   }
 
   private void registerGameModeTriggerAndCommand() {
@@ -119,8 +126,15 @@ public final class CrucioApp extends JavaPlugin {
     spawn.setTabCompleter(spawnCommand);
   }
 
+  private void registerWarpCommand() {
+    var warp = getCommand("warp");
+    warp.setExecutor(warpCommand);
+    warp.setTabCompleter(warpCommand);
+  }
+
   @Override
   public void onDisable() {
     playerRepository.saveAll();
+    warpRepository.saveAll();
   }
 }

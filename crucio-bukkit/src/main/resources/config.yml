@@ -20,6 +20,12 @@ messages:
     spawn-teleport-failed: 'Du wurdest nicht zum Spawn teleportiert.'
     command-player-only: 'Dieses Kommando ist nur für Spieler.'
     command-player-not-found: 'Dieser Spieler wurde nicht gefunden.'
+    warp-list: 'Es gibt &6%d&e Warps'
+    warp-teleport: 'Du wurdest zum Warp &6%s&e teleportiert.'
+    warp-created: 'Du hast den Warp &6%s&e  gesetzt.'
+    warp-deleted: 'Du hast den Warp &6%s&e  gelöscht.'
+    warp-not-found: 'Dieser Warp konnte nicht gefunden werden'
+    warp-not-permitted: 'Du bist nicht für diesen Warp berechtigt.'
     player-join: '%s &eist jetzt hier.'
     player-quit: '%s &eist jetzt weg.'
   en-US:
