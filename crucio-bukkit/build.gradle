@@ -9,8 +9,9 @@ dependencies {
   compileOnly "com.github.MilkBowl:VaultAPI:1.7"
 }
 
-jar {
-  from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+shadowJar {
+  minimize()
+  relocate 'com.fasterxml.jackson', 'com.mysteryworlds.jackson'
 }
 
 publishing {
