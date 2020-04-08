@@ -96,3 +96,5 @@ permissions:
     description: "Gives you access for the command to delete warps"
   crucio.warp.all:
     description: "Gices you access to every single warp point"
+  crucio.coloredsigns:
+    description: "Allows you to created colored signs"

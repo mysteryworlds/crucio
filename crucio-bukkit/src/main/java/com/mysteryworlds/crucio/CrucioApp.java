@@ -1,6 +1,7 @@
 package com.mysteryworlds.crucio;
 
 import com.google.inject.Guice;
+import com.mysteryworlds.crucio.colorsign.ColoredSignTrigger;
 import com.mysteryworlds.crucio.config.CrucioConfig;
 import com.mysteryworlds.crucio.cosmetic.PlayerCosmeticTrigger;
 import com.mysteryworlds.crucio.fly.FlyCommand;
@@ -42,6 +43,8 @@ public final class CrucioApp extends JavaPlugin {
   private SpawnCommand spawnCommand;
   @Inject
   private WarpCommand warpCommand;
+  @Inject
+  private ColoredSignTrigger coloredSignTrigger;
 
   @Inject
   @Named("usersPath")
@@ -94,6 +97,7 @@ public final class CrucioApp extends JavaPlugin {
     registerGodModeTriggerAndCommand();
     registerSpawnCommand();
     registerWarpCommand();
+    registerColoredSignTrigger();
   }
 
   private void registerGameModeTriggerAndCommand() {
@@ -130,6 +134,10 @@ public final class CrucioApp extends JavaPlugin {
     var warp = getCommand("warp");
     warp.setExecutor(warpCommand);
     warp.setTabCompleter(warpCommand);
+  }
+
+  private void registerColoredSignTrigger() {
+    pluginManager.registerEvents(coloredSignTrigger, this);
   }
 
   @Override
