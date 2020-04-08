@@ -30,6 +30,9 @@ commands:
   spawn:
     description: Teleports you to the worlds spawn
     permission: crucio.command.spawn
+  warp:
+    description: Teleports you to certain positions
+    permission: crucio.command.warp
 
 permissions:
   crucio.*:
@@ -45,6 +48,7 @@ permissions:
       - crucio.command.godmode.*
       - crucio.command.fly.*
       - crucio.command.spawn
+      - crucio.command.warp.*
   crucio.command.gamemode.*:
     description: "Gives you access to all game mode related commands"
     children:
@@ -74,3 +78,21 @@ permissions:
     description: "Gives you access for the command to change other players fly mode"
   crucio.command.spawn:
     description: "Gives you access for teleporting to the spawn"
+  crucio.command.warp.*:
+    description: "Gives you access to all warp commands"
+    children:
+      - crucio.command.warp
+      - crucio.command.warp.list
+      - crucio.command.warp.create
+      - crucio.command.warp.delete
+      - crucio.warp.all
+  crucio.command.warp:
+    description: "Gives you access for the command to warp to positions"
+  crucio.command.warp.list:
+    description: "Gives you access for the command to list all warps"
+  crucio.command.warp.create:
+    description: "Gives you access for the command to create warps"
+  crucio.command.warp.delete:
+    description: "Gives you access for the command to delete warps"
+  crucio.warp.all:
+    description: "Gices you access to every single warp point"

@@ -1,5 +1,8 @@
 package com.mysteryworlds.crucio;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator.Feature;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.inject.AbstractModule;
@@ -47,6 +50,29 @@ public final class CrucioModule extends AbstractModule {
   @Named("usersPath")
   Path provideUsersPath() {
     return Path.of(crucioApp.getDataFolder().getAbsolutePath(), USERS_SUB_PATH);
+  }
+
+  private static final String WARPS_LOCATION = "warps.yml";
+
+  @Provides
+  @Singleton
+  @Named("warpsPath")
+  Path provideWarpsPath() {
+    return Path.of(crucioApp.getDataFolder().getAbsolutePath(), WARPS_LOCATION);
+  }
+
+  @Provides
+  @Singleton
+  YAMLFactory provideYamLFactory() {
+    return YAMLFactory.builder()
+      .disable(Feature.WRITE_DOC_START_MARKER)
+      .build();
+  }
+
+  @Provides
+  @Singleton
+  ObjectMapper provideObjectMapper(YAMLFactory yamlFactory) {
+    return new ObjectMapper(yamlFactory);
   }
 
   @Provides
