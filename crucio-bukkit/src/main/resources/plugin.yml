@@ -33,6 +33,9 @@ commands:
   warp:
     description: Teleports you to certain positions
     permission: crucio.command.warp
+  home:
+    description: Teleports you to your home
+    permission: crucio.command.home
 
 permissions:
   crucio.*:
@@ -49,6 +52,7 @@ permissions:
       - crucio.command.fly.*
       - crucio.command.spawn
       - crucio.command.warp.*
+      - crucio.command.home.*
   crucio.command.gamemode.*:
     description: "Gives you access to all game mode related commands"
     children:
@@ -95,6 +99,18 @@ permissions:
   crucio.command.warp.delete:
     description: "Gives you access for the command to delete warps"
   crucio.warp.all:
-    description: "Gices you access to every single warp point"
+    description: "Gives you access to every single warp point"
   crucio.coloredsigns:
     description: "Allows you to created colored signs"
+  crucio.command.home.*:
+    description: "Gives you access to all home commands"
+    children:
+      - crucio.command.home.list
+      - crucio.command.home.set
+      - crucio.command.home.delete
+  crucio.command.home.list:
+    description: "Gives you access for the command to list your homes"
+  crucio.command.home.set:
+    description: "Gives you access for the command to set your homes"
+  crucio.command.home.delete:
+    description: "Gives you access for the command to delete your homes"

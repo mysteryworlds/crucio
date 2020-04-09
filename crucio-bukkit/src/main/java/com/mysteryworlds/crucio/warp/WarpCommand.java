@@ -155,7 +155,7 @@ public final class WarpCommand implements CommandExecutor, TabCompleter {
   ) {
     switch (args.length) {
       case 1: {
-        var commands = new ArrayList<String>(Arrays.asList("set", "delete"));
+        var commands = new ArrayList<>(Arrays.asList("set", "delete"));
         return StringUtil.copyPartialMatches(
           args[0],
           findWarpNames(),

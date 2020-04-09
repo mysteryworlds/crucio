@@ -10,6 +10,7 @@ import com.mysteryworlds.crucio.gamemode.GameModeChangeTrigger;
 import com.mysteryworlds.crucio.gamemode.GameModeCommand;
 import com.mysteryworlds.crucio.god.GodModeCommand;
 import com.mysteryworlds.crucio.god.GodModeTrigger;
+import com.mysteryworlds.crucio.home.HomeCommand;
 import com.mysteryworlds.crucio.player.PlayerRepository;
 import com.mysteryworlds.crucio.spawn.SpawnCommand;
 import com.mysteryworlds.crucio.warp.WarpCommand;
@@ -20,6 +21,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -48,6 +50,8 @@ public final class CrucioApp extends JavaPlugin {
   private ColoredSignTrigger coloredSignTrigger;
   @Inject
   private DeathMessageTrigger deathMessageTrigger;
+  @Inject
+  private HomeCommand homeCommand;
 
   @Inject
   @Named("usersPath")
@@ -102,6 +106,7 @@ public final class CrucioApp extends JavaPlugin {
     registerWarpCommand();
     registerColoredSignTrigger();
     registerDeathMessageTrigger();
+    registerHomeCommand();
   }
 
   private void registerGameModeTriggerAndCommand() {
@@ -138,6 +143,12 @@ public final class CrucioApp extends JavaPlugin {
     var warp = getCommand("warp");
     warp.setExecutor(warpCommand);
     warp.setTabCompleter(warpCommand);
+  }
+
+  private void registerHomeCommand() {
+    var home = getCommand("home");
+    home.setExecutor(homeCommand);
+    home.setTabCompleter(homeCommand);
   }
 
   private void registerColoredSignTrigger() {
