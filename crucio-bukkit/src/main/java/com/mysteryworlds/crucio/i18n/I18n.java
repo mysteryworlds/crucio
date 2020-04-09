@@ -51,8 +51,8 @@ public final class I18n {
   ) {
     var message = findMessage(locale, messageKey);
     var prefix = translateMessage(PREFIX_KEY, locale);
-    message = String.format(message, arguments);
-    message =  String.format("%s%s", prefix, message);
+    message = formatString(message, arguments);
+    message =  formatString("%s%s", prefix, message);
     return ChatColor.translateAlternateColorCodes('&', message);
   }
 
@@ -82,7 +82,7 @@ public final class I18n {
     Object... arguments
   ) {
     var message = findMessage(locale, messageKey);
-    message = String.format(message, arguments);
+    message = formatString(message, arguments);
     return ChatColor.translateAlternateColorCodes('&', message);
   }
 
@@ -93,5 +93,12 @@ public final class I18n {
   public static I18n withMessages(Table<Locale, String, String> messages) {
     Preconditions.checkNotNull(messages);
     return new I18n(messages);
+  }
+
+  private String formatString(String message, Object... arguments) {
+    if (arguments.length == 0) {
+      return message;
+    }
+    return String.format(message, arguments);
   }
 }

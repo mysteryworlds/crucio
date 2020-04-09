@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.mysteryworlds.crucio.colorsign.ColoredSignTrigger;
 import com.mysteryworlds.crucio.config.CrucioConfig;
 import com.mysteryworlds.crucio.cosmetic.PlayerCosmeticTrigger;
+import com.mysteryworlds.crucio.death.DeathMessageTrigger;
 import com.mysteryworlds.crucio.fly.FlyCommand;
 import com.mysteryworlds.crucio.gamemode.GameModeChangeTrigger;
 import com.mysteryworlds.crucio.gamemode.GameModeCommand;
@@ -45,6 +46,8 @@ public final class CrucioApp extends JavaPlugin {
   private WarpCommand warpCommand;
   @Inject
   private ColoredSignTrigger coloredSignTrigger;
+  @Inject
+  private DeathMessageTrigger deathMessageTrigger;
 
   @Inject
   @Named("usersPath")
@@ -98,6 +101,7 @@ public final class CrucioApp extends JavaPlugin {
     registerSpawnCommand();
     registerWarpCommand();
     registerColoredSignTrigger();
+    registerDeathMessageTrigger();
   }
 
   private void registerGameModeTriggerAndCommand() {
@@ -138,6 +142,10 @@ public final class CrucioApp extends JavaPlugin {
 
   private void registerColoredSignTrigger() {
     pluginManager.registerEvents(coloredSignTrigger, this);
+  }
+
+  private void registerDeathMessageTrigger() {
+    pluginManager.registerEvents(deathMessageTrigger, this);
   }
 
   @Override

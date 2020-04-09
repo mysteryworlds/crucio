@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 
 public final class CrucioConfig {
   private final String chatFormat;

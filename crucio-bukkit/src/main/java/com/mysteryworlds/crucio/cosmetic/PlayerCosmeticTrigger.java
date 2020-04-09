@@ -3,6 +3,7 @@ package com.mysteryworlds.crucio.cosmetic;
 import com.mysteryworlds.crucio.i18n.I18n;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -24,7 +25,16 @@ public final class PlayerCosmeticTrigger implements Listener {
 
   @EventHandler
   public void onPlayerJoin(PlayerJoinEvent playerJoin) {
+    setupNaming(playerJoin);
     setupJoinMessage(playerJoin);
+  }
+
+  private void setupNaming(PlayerJoinEvent playerJoin) {
+    var player = playerJoin.getPlayer();
+    player.setDisplayName(player.getName());
+    player.setPlayerListName(player.getName());
+    player.setCustomName(player.getName());
+    player.setCustomNameVisible(true);
   }
 
   private void setupJoinMessage(PlayerJoinEvent playerJoin) {

@@ -28,6 +28,7 @@ All commands have a fully working tab completion and are well documented.
 - Jail
 - Game Mode
 - Teleportation (Chunks, Coordinates, etc.)
+- Custom Death Messages
 
 ## Contributing
 If you are interested in contributing, please read the [CONTRIBUTING.md](CONTRIBUTING.md).
