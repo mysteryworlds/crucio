@@ -19,10 +19,10 @@ commands:
       - gm
       - mode
     permission: crucio.command.gamemode
-  godmode:
+  god:
     description: Changes your own or other players god mode.
     aliases:
-      - god
+      - godmode
     permission: crucio.command.godmode
   fly:
     description: Changes you fly mode

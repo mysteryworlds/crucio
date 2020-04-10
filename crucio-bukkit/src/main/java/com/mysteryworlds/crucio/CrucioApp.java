@@ -127,7 +127,7 @@ public final class CrucioApp extends JavaPlugin {
   }
 
   private void registerGodModeTriggerAndCommand() {
-    var godmode = getCommand("godmode");
+    var godmode = getCommand("god");
     godmode.setExecutor(godModeCommand);
     godmode.setTabCompleter(godModeCommand);
     pluginManager.registerEvents(godModeTrigger, this);
